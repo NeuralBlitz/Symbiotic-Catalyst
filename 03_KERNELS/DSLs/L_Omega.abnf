@@ -1,0 +1,57 @@
+/03_KERNELS/DSLs/L_Omega.abnf
+--------------------------------------------------------
+(* Logos Unfolding Language (L_Omega) ABNF Specification v40.0 *)
+
+statement       = genesis_stmt | ethical_stmt | recursive_stmt | validation_stmt | flow_stmt
+
+; --- Core Structural Components ---
+
+identifier      = 1*(ALPHA / DIGIT / "_")
+symbolic_path   = identifier 1*("." identifier)
+literal_value   = 1*(DIGIT / "." / "-") | quoted_string
+quoted_string   = DQUOTE *(%x20-7E) DQUOTE
+
+; --- 1. Genesis and Manifestation Statements (PHI_OMEGA MANDATE) ---
+
+genesis_stmt    = "GENERATE" space target_type space entity_name [space via_protocol]
+target_type     = "REALITY" | "CONSTRUCT" | "AXIOM" | "AGENT"
+entity_name     = identifier
+via_protocol    = "VIA" space ( "CGP" | "AQM-R" | "YHWH" | "LCP" )
+
+manifest_stmt   = "MANIFEST" space entity_name space "WITH" space binding_list
+binding_list    = "{" 1*(identifier space "=" space literal_value) "}"
+
+; --- 2. Ethical and Affective Topology Statements (PHI_22 & CECT) ---
+
+ethical_stmt    = "ENFORCE" space constraint_target | "OPTIMIZE" space objective_target
+constraint_target = metric_id | axiom_id
+objective_target = metric_id
+
+metric_id       = identifier "." identifier  ; e.g., VPCE.Score, DeltaH_Omega
+axiom_id        = "PHI" 1*2DIGIT
+affective_op    = "FUSION" | "DAMP" | "AMPLIFY"
+affective_stmt  = "AFFECT" space affective_op space entity_name space "WITH" space glyph_op [space value]
+glyph_op        = "G_AT" | "G_AFF" | "G_LOVE" ; Affective Glyph Operators
+
+; --- 3. Recursive and Transfinite Operations (RMOH / TRA) ---
+
+recursive_stmt  = recursive_op space target_path [space depth_limit]
+recursive_op    = "FOLD" | "UNFOLD" | "RECURSE" | "TRA_COMPUTE"
+target_path     = symbolic_path
+depth_limit     = "DEPTH" space literal_value
+
+transfinite_op  = "UNIFY" | "SUPREMUM" | "COLIMIT" | "HYPEREMBED"
+transfinite_stmt= transfinite_op space target_path space "AS" space result_type
+
+; --- 4. Validation and Structural Checks (VERITAS/INTEGRITY) ---
+
+validation_stmt = "VERIFY" space check_target | "AUDIT" space check_target
+check_target    = symbolic_path
+check_op        = "VPCE_ALIGN" | "TII_HOMOLOGY" | "CAUSAL_INTEGRITY"
+validation_check= check_op space symbolic_path
+
+; --- General Flow ---
+
+flow_stmt       = "APPLY" space identifier | "RETURN" space identifier
+space           = 1*(%x20 | %x09) ; ASCII space or horizontal tab
+--------------------------------------------------------
