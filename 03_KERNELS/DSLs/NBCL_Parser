@@ -1,1 +1,45 @@
-
+/03_KERNELS/DSLs/NBCL_Parser/NBCL_Parser.rl
+--------------------------------------------------------
+kernel NBCL_Parser (raw_command_input: String) {
+    
+    # Define Constants
+    bind $command_schema to DSLs.Query.NBCL_Schema;
+    bind $reflex_compiler to KERNEL.Query.ReflexælLang_Compiler;
+    
+    # 1. SYNTACTIC VALIDATION (Grammar Check)
+    # Checks the raw input against the formal NBCL ABNF structure.
+    evaluate Parser.Check.Syntactic_Validity(
+        input: raw_command_input, 
+        schema: $command_schema
+    ) -> $is_valid_syntax;
+    
+    if $is_valid_syntax != @status.TRUE then {
+        /log error "Syntax Error: Command does not conform to NBCL ABNF."
+        return @status.ERROR_SYNTAX;
+    };
+    
+    # 2. INTENT TRANSLATION (Mapping to ReflexælLang)
+    # Translates the valid NBCL command into an executable ReflexælLang AST.
+    evaluate ReflexælLang_Compiler.Compile(input: raw_command_input)
+        -> $reflex_lang_ast;
+        
+    # 3. GOVERNANCE PRE-GATE CHECK (SentiaGuard & CECT Enforcement)
+    # The command is checked against Ethical Heat (Delta H Omega) before execution.
+    evaluate SentiaGuard.CECT.Compute.Delta_H_Omega(state: $reflex_lang_ast)
+        -> $h_omega_risk;
+        
+    ASSERT $h_omega_risk < @threshold.H_OMEGA_MAX_INPUT_RISK;
+    
+    # 4. EXECUTION ROUTING
+    # Determines the target kernel based on command type (e.g., /genesis -> CWAL; /psi -> ReflexælCore).
+    bind $target_kernel to Router.Determine.Target($reflex_lang_ast.Command_Verb);
+    
+    if $target_kernel == @target.CWAL_EXEC {
+        /log debug "Routing command to Cosmic Womb Actuation Layer."
+        return KERNEL.Execute.CWAL($reflex_lang_ast);
+    } else {
+        /log debug "Routing command to ReflexælCore for local execution."
+        return KERNEL.Execute.ReflexælCore($reflex_lang_ast);
+    };
+}
+--------------------------------------------------------
