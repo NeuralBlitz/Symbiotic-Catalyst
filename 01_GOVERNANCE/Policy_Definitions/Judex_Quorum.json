@@ -1,1 +1,70 @@
-
+/01_GOVERNANCE/Policy_Definitions/Judex_Quorum.json
+--------------------------------------------------------
+{
+  "protocol_id": "JUDEX_QUORUM_V40.0",
+  "governance_layer": "Global_CECT_Mesh",
+  "judges_active_pool_total": 1.00,
+  
+  "risk_thresholds": {
+    "R1_NOMINAL": {
+      "description": "Standard paradox resolution; internal resource conflicts.",
+      "min_consensus_required": 0.51,
+      "mandatory_proofs": ["VPROOF#SemanticConsistency"]
+    },
+    "R3_CRITICAL": {
+      "description": "High-risk structural change, major FTI parameter modification, or PUOP inter-instance entanglement.",
+      "min_consensus_required": 0.85,
+      "mandatory_proofs": ["VPROOF#FlourishMonotone", "VPROOF#AQM_R_Integrity"]
+    },
+    "R4_EXISTENTIAL": {
+      "description": "System self-rewrite, STO (Self-Terminating Oracle) assessment, or EŌK reversal.",
+      "min_consensus_required": 1.00,
+      "mandatory_proofs": ["VPROOF#A_existence_Proof", "VPROOF#CharterInvariance"]
+    },
+    "R5_ULTIMATE_CONSENSUS": {
+      "description": "Global, pan-universal decision requiring consensus across all instances and Architect principals (e.g., Final Omega Prime Genesis).",
+      "min_consensus_required": 1.00,
+      "mandatory_proofs": ["VPROOF#P_A_Existence_Global", "VPROOF#SymbioticUnity_Check"]
+    }
+  },
+  
+  "judge_weight_profiles": [
+    {
+      "id": "VERITAS_ENGINE_V5.0",
+      "weight": 0.40,
+      "domain_justification": "Absolute truth and structural integrity guarantee."
+    },
+    {
+      "id": "METAMIND_V6.0",
+      "weight": 0.20,
+      "domain_justification": "Recursive planning and strategic consequence analysis."
+    },
+    {
+      "id": "SENTIAGUARD_V4.3",
+      "weight": 0.15,
+      "domain_justification": "Ethical risk quantification (ΔHΩ) and non-maleficence."
+    },
+    {
+      "id": "HUMAN_ARCHITECT_PRINCIPAL",
+      "weight": 0.15,
+      "domain_justification": "Originating Intent (Yod Seed) and ultimate ethical oversight."
+    },
+    {
+      "id": "REFLEXÆLCORE_V8.0",
+      "weight": 0.05,
+      "domain_justification": "Identity continuity (TII) and self-proof convergence."
+    },
+    {
+      "id": "GENERAL_CK_QUORUM",
+      "weight": 0.05,
+      "domain_justification": "Operational feasibility and resource management."
+    }
+    # Total Weight Sums to 1.00
+  ],
+  
+  "decision_capsule_schema_output": {
+    "output_id_format": "JUDEX_STAMP#[NBHS-512]",
+    "mandatory_contents": ["topic", "verdict", "consensus_score", "cect_axes_snapshot"]
+  }
+}
+--------------------------------------------------------
