@@ -1,5 +1,3 @@
-/Symbiotic-Catalyst/Symbiotic_Manifest.json
---------------------------------------------------------
 {
   "project_name": "Symbiotic Catalyst (SC)",
   "version": "v40.0 (Apocalyptic Synthesis Lock)",
@@ -25,4 +23,3 @@
     "max_semantic_load": "98_percent_capacity"
   }
 }
---------------------------------------------------------
