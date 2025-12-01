@@ -1,0 +1,10 @@
+/01_GOVERNANCE/CharterDSL.abnf
+--------------------------------------------------------
+assertion     = "ASSERT" predicate [ space comparison_op value ]
+predicate     = axiom_clause | metric_name | formal_relation
+axiom_clause  = "ϕ" 1*2DIGIT
+metric_name   = "VPCE" | "ΔHΩ" | "AQM-RF" | "SICRE"
+formal_relation = identifier "." identifier
+constraint_def= "RULE" condition "IMPLIES" consequence
+comparison_op = "==" | "!=" | ">=" | "<=" | "<" | ">"
+--------------------------------------------------------
