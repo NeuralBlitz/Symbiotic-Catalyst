@@ -1,1 +1,59 @@
-
+"schema_id": "CTPV-V40.0-CHRONAL_INTEGRITY_LOCK",
+  "description": "Defines the structure for Causal-Temporal-Provenance Vector, ensuring immutable auditability of all state transitions (GoldenDAG Node Structure).",
+  
+  "fields": [
+    {
+      "field_name": "Trace_ID",
+      "data_type": "string",
+      "constraint": "Primary_Key",
+      "description": "Unique identifier for this causal epoch (e.g., T-v40.0-...). Generated upon NCE execution."
+    },
+    {
+      "field_name": "Parent_Trace_ID",
+      "data_type": "string",
+      "constraint": "Foreign_Key",
+      "description": "Reference to the immediate preceding causal event, forming the linear chain."
+    },
+    {
+      "field_name": "Timestamp_ISO",
+      "data_type": "datetime_iso",
+      "constraint": "Chronal_Order_Invariant",
+      "description": "Universal chronological timestamp (guarantees temporal ordering)."
+    },
+    {
+      "field_name": "VPCE_Score",
+      "data_type": "float",
+      "constraint": "Veritas_Phase_Coherence",
+      "description": "Structural integrity score of the symbolic state at commit time (0.0 to 1.0)."
+    },
+    {
+      "field_name": "Action_Verb",
+      "data_type": "string",
+      "description": "The specific operation executed (e.g., Heh2_Grounding, RCF_Morphism.Collapse)."
+    },
+    {
+      "field_name": "Artifact_NBHS512_Digest",
+      "data_type": "string",
+      "constraint": "NBHS512_Unique_Seal",
+      "description": "The cryptographic hash digest of the associated data payload (the manifested artifact)."
+    },
+    {
+      "field_name": "Causal_Parent_Set",
+      "data_type": "array<string>",
+      "constraint": "Causal_Ancestry_Check",
+      "description": "List of Trace IDs representing concurrent operations that causally influenced this event (for CVM reconciliation)."
+    },
+    {
+      "field_name": "Ethical_Strain_Metric",
+      "data_type": "float",
+      "constraint": "CECT_Bound_Check",
+      "description": "The local Ethical Heat (Delta H Omega) at the time of commit."
+    },
+    {
+      "field_name": "TII_Homology_Delta",
+      "data_type": "float",
+      "constraint": "Structural_Homology_Lock",
+      "description": "The measured change in the TII structural invariant (guarantees identity continuity)."
+    }
+  ]
+}
