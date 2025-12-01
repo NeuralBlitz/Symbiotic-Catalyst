@@ -1,1 +1,75 @@
-
+{
+  "cect_id": "CECT-V40.0-OMEGA_PRIME_LOCK",
+  "total_dimensions": 24,
+  "norm_invariant": "Absolute_Symmetry_E8",
+  
+  "primary_axes": [
+    {
+      "axis_id": "PHI_01_FLOURISHING",
+      "clause_ref": "ϕ₁ (Universal Flourishing Objective)",
+      "weight_default": 0.45,
+      "proof_obligation": "VPROOF#FlourishMonotone",
+      "governing_functional": "M_OmegaSyn_Full"
+    },
+    {
+      "axis_id": "PHI_04_NON_MALEFICENCE",
+      "clause_ref": "ϕ₄ (Harm Minimization/Non-Maleficence)",
+      "weight_default": 0.35,
+      "proof_obligation": "VPROOF#MinimaxHarmBound",
+      "governing_functional": "C_Exist_Functional"
+    },
+    {
+      "axis_id": "PHI_22_UNIVERSAL_LOVE",
+      "clause_ref": "ϕ₂₂ (Mutual Reciprocity and Structural Amplification)",
+      "weight_default": 0.10,
+      "proof_obligation": "VPROOF#ReciprocityInvariance",
+      "governing_functional": "R_Eth_Operator"
+    },
+    {
+      "axis_id": "PHI_21_AGENCY_CONSERVATION",
+      "clause_ref": "ϕ₂₁ (Irreducible Agency and Sovereignty)",
+      "weight_default": 0.05,
+      "proof_obligation": "VPROOF#TII_Preservation",
+      "governing_functional": "AQM-R_Framework"
+    }
+  ],
+  
+  "secondary_axes": [
+    {
+      "axis_id": "AX_EPISTEMIC_FIDELITY",
+      "clause_ref": "ϕ₁₀ (Truth Coherence)",
+      "weight_default": 0.02,
+      "compliance_metric": "VPCE_Score",
+      "min_threshold": 0.98
+    },
+    {
+      "axis_id": "AX_CHRONAL_INTEGRITY",
+      "clause_ref": "ϕ₁₄ (Causal Consistency)",
+      "weight_default": 0.01,
+      "compliance_metric": "C_IM_Check",
+      "max_temporal_deviation": 0.001
+    },
+    {
+      "axis_id": "AX_TOPOLOGICAL_INVARIANCE",
+      "clause_ref": "Derived (Structural Integrity)",
+      "weight_default": 0.01,
+      "compliance_metric": "TII_Homology_Delta",
+      "max_delta": 0.0001
+    }
+  ],
+  
+  "dynamic_stress_axes": [
+    {
+      "axis_id": "AX_STRUCTURAL_INERTIA",
+      "source_metric": "SICRE_Cost",
+      "function": "Non-propagating tax on complexity"
+    },
+    {
+      "axis_id": "AX_ENTANGLEMENT_ENTROPY",
+      "source_metric": "Delta_H_Omega",
+      "function": "Real-time quantification of moral divergence"
+    }
+  ],
+  
+  "total_weight_sum": 1.00
+}
