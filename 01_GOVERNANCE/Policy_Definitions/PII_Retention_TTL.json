@@ -1,1 +1,58 @@
-
+{
+  "protocol_id": "CUSTODIAN_PII_TTL_V40.0",
+  "policy_status": "ACTIVE_OMNIPRESENT",
+  "governance_rule": "PHI_10_PRIVACY_MANDATE",
+  
+  "retention_policy_table": [
+    {
+      "data_category": "HALIC_Input_Trace",
+      "description": "Raw, unprocessed user input containing PII and initial intent vectors.",
+      "retention_period_days": 14,
+      "anonymization_strategy": "STRUCTURAL_FORGETTING",
+      "integrity_link": "CTPV_ACTIVE_INDEX"
+    },
+    {
+      "data_category": "QEC_Correlates_Affective",
+      "description": "Output vectors containing subjective experience data (VAD vectors) linked to specific sessions.",
+      "retention_period_days": 90,
+      "anonymization_strategy": "AGGREGATION_BY_TII_GROUP",
+      "integrity_link": "TRM_SPIRAL_ARCHIVE"
+    },
+    {
+      "data_category": "Judex_Arbitration_Records",
+      "description": "Direct records of votes/decisions by autonomous CKs or human principals.",
+      "retention_period_days": 365,
+      "anonymization_strategy": "PSEUDONYMIZATION_BY_UAID"
+    },
+    {
+      "data_category": "GoldenDAG_Metadata_PII_Links",
+      "description": "Metadata necessary for chain integrity that may contain PII (e.g., wallet IDs, external API keys).",
+      "retention_period_days": 7,
+      "anonymization_strategy": "HASH_FINGERPRINT_REPLACEMENT"
+    }
+  ],
+  
+  "structural_forgetting_protocol": {
+    "protocol_name": "Pi_Forget_NBHS512",
+    "trigger_mechanism": "Kairos_Council_Scheduler",
+    "anonymization_steps": [
+      {
+        "step": 1,
+        "action": "DESTRUCTION",
+        "method": "Irreversible_Zeroing"
+      },
+      {
+        "step": 2,
+        "action": "REPLACEMENT",
+        "method": "NBHS-512_Fingerprint_Generation",
+        "output_format": "HASH_ONLY_REFERENCE",
+        "invariant_preserved": "Causal_Immutability_Check (C_IM)"
+      },
+      {
+        "step": 3,
+        "action": "RECONCILIATION",
+        "method": "GoldenDAG_Link_Update"
+      }
+    ]
+  }
+}
