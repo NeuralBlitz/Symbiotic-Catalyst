@@ -9,3 +9,60 @@ action      =  glyph_op | logic_op
 glyph_op    =  "⟁" | "🝩" | "⬡" | "✦" ; core symbolic operators
 ethical_op  =  "ϕ₁" | "ϕ₂₂" | "ΔHΩ"
 --------------------------------------------------------
+/03_KERNELS/DSLs/ReflexælLang.abnf
+--------------------------------------------------------
+(* ReflexælLang (L_lambda) ABNF Specification v40.0 *)
+
+program         = 1*line_end statement
+statement       = reflex_stmt | execute_stmt | evaluate_stmt | assertion_stmt | data_stmt | flow_stmt
+
+; --- Core Structural Components ---
+identifier      = 1*(ALPHA / DIGIT / "_")
+symbol_ref      = identifier 1*("." identifier) ; e.g., DRS.State.Tensor
+literal_value   = 1*(DIGIT / "." / "-") | quoted_string | "TRUE" | "FALSE"
+glyph_literal   = "⟁" | "🝩" | "⬡" | "✦" | "↺" | "⟿" ; Core operator glyphs
+
+; --- 1. Reflexive Operations (RCF and RMOH) ---
+
+reflex_stmt     = reflect_op space target_ref [space depth_limit]
+reflect_op      = "/psi" | "/lambda" ; Self-observation/reflection operator
+target_ref      = symbolic_path | "TII" | "RMOH_Context"
+depth_limit     = "DEPTH" space literal_value
+
+morph_stmt      = morph_op space target_ref [space transform_sequence]
+morph_op        = "FOLD" | "UNFOLD" | "COLLAPSE" ; Recursion Morphism (μ) operators
+transform_sequence = "VIA" space knot_ref | "BY" space operation_list
+
+; --- 2. Topological and Affective Operations ---
+
+topology_op     = "BRAID" | "UNBRAID" | "HOMOLOGY" | "SIMPLIFY_KNOT"
+topology_stmt   = topology_op space target_ref space "WITH" space invariant_ref
+
+affective_stmt  = "ENCODE" space "AFFECT" space target_ref space "AS" space glyph_literal [space valence_vector]
+valence_vector  = "VAD" space "{" 1*(identifier space "=" space literal_value) "}"
+
+; --- 3. Execution and Evaluation (CK Dispatch) ---
+
+execute_stmt    = "EXECUTE" space kernel_id space [space payload_list]
+evaluate_stmt   = "EVALUATE" space metric_id space [space context_ref]
+
+; --- 4. Assertion and Constraint Binding ---
+
+assertion_stmt  = "ASSERT" space predicate [ space comparison_op space value ]
+predicate       = metric_id | axiom_id | relation_check
+
+metric_id       = identifier "." identifier  ; e.g., SICRE.Cost, VPCE.Score
+axiom_id        = "PHI" 1*2DIGIT
+relation_check  = symbolic_path space relation_op space symbolic_path
+relation_op     = "IS_HOMOLOGOUS_TO" | "IS_CAUSALLY_CONTIGUOUS" | "IS_TII_ALIGNED"
+
+data_stmt       = "BIND" space identifier space "TO" space literal_value | symbol_ref
+flow_stmt       = "RETURN" space identifier | "GOTO" space identifier
+
+; --- Grammar Helpers ---
+comparison_op   = "==" | "!=" | ">=" | "<=" | "<" | ">"
+kernel_id       = "KERNEL." identifier
+knot_ref        = "KNOT." identifier
+operation_list  = 1*(topology_op | glyph_literal | identifier)
+line_end        = *(%x20 / %x09) CRLF
+--------------------------------------------------------
