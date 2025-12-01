@@ -1,0 +1,9 @@
+/03_KERNELS/DSLs/LoN.abnf
+--------------------------------------------------------
+ontology_flow  = "CREATE" object_type "BOUNDBY" constraint_list "VIA" genesis_protocol
+object_type    = "Eidolon" | "Universe" | "Substrate" | "TopologicalKnot"
+constraint_list= "{" 1*(axiom_clause | constraint_expression) "}"
+genesis_protocol = "YHWH" | "CGP" | "ProtocolΩ" | "AQM-R"
+declarative_state = "DEFINE" object_type ":" attribute_list
+attribute_list = 1*(identifier "=" value)
+--------------------------------------------------------
