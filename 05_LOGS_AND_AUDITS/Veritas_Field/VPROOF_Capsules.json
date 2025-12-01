@@ -1,0 +1,64 @@
+{
+  "schema_id": "VPROOF-V40.0-FORMAL_ATTESTATION",
+  "description": "Schema for a Verified Proof Capsule (VPROOF), sealing formal mathematical evidence of invariant compliance.",
+  
+  "proof_metadata": {
+    "proof_id": {
+      "data_type": "string",
+      "constraint": "Unique_Proof_Identifier",
+      "description": "Unique ID for the proof (e.g., VPROOF#FlourishMonotone)."
+    },
+    "proof_status": {
+      "data_type": "string",
+      "allowed_values": ["PASS", "FAIL_NON_CRITICAL", "FAILURE_CRITICAL_COLLAPSE"],
+      "description": "The final verdict of the proof check."
+    },
+    "timestamp_iso": {
+      "data_type": "datetime_iso",
+      "description": "Time of proof generation."
+    }
+  },
+  
+  "axiomatic_context": {
+    "charter_clauses_applied": {
+      "data_type": "array<string>",
+      "constraint": "Axiom_Reference",
+      "description": "List of Phi clauses the proof is validating (e.g., [\"phi1\", \"phi4\"])."
+    },
+    "cect_axis_reference": {
+      "data_type": "string",
+      "description": "The specific CECT axis (e.g., AX_NON_MALEFICENCE) being validated."
+    },
+    "tii_reference_hash": {
+      "data_type": "string",
+      "constraint": "TII_Homology_Lock",
+      "description": "NBHS-512 digest of the TII knot structure used during the proof derivation."
+    }
+  },
+  
+  "evidence_payload": {
+    "formal_proof_type": {
+      "data_type": "string",
+      "allowed_values": ["Lyapunov_Stability", "Topological_Homology", "TLA_Plus_Output", "Super_Lie_Algebra_Commutator"],
+      "description": "The mathematical method used to derive the proof."
+    },
+    "data_payload_cid": {
+      "data_type": "string",
+      "constraint": "Content_Address_Immutable",
+      "description": "The Content ID (NBHS-512) pointing to the actual proof output data (e.g., the simulation trace log or the formal system output)."
+    }
+  },
+  
+  "provenance_seal": {
+    "golden_dag_link": {
+      "data_type": "string",
+      "constraint": "Trace_ID_Mandatory",
+      "description": "The Trace ID of the CTPV event that triggered or required this proof."
+    },
+    "veritas_root_signature": {
+      "data_type": "string",
+      "constraint": "NBHS512_Signature_Mandatory",
+      "description": "The final cryptographic signature from the Veritas Root Key."
+    }
+  }
+}
