@@ -8,3 +8,49 @@ formal_relation = identifier "." identifier
 constraint_def= "RULE" condition "IMPLIES" consequence
 comparison_op = "==" | "!=" | ">=" | "<=" | "<" | ">"
 --------------------------------------------------------
+--------------------------------------------------------
+(* Charter Domain-Specific Language (CharterDSL) ABNF Specification v40.0 *)
+
+statement       = assertion | rule_definition | invariant_declaration | proof_obligation
+
+; --- Core Components ---
+
+identifier      = 1*(ALPHA / DIGIT / "_")
+metric_id       = identifier "." identifier
+value           = 1*(DIGIT / "." / "-")
+axiom_id        = "phi" 1*2DIGIT
+
+; --- 1. Assertions and Predicates (VERITAS/CECT Check) ---
+
+assertion       = "ASSERT" space predicate [ space comparison_op space value ]
+predicate       = metric_id | axiom_id | formal_relation
+comparison_op   = "==" | "!=" | ">=" | "<=" | "<" | ">"
+
+formal_relation = entity_id space relation_op space target_id
+entity_id       = identifier
+target_id       = identifier
+relation_op     = "IS_ALIGNED_TO" | "IS_CONSISTENT_WITH" | "IS_HOMOLOGOUS_TO"
+
+; --- 2. Rule Definitions (SENTIAGUARD/JUDEX Action) ---
+
+rule_definition = "RULE" space condition space "IMPLIES" space consequence
+condition       = predicate | logic_expr | metric_id space comparison_op space value
+logic_expr      = "(" space condition space logic_op space condition space ")"
+logic_op        = "AND" | "OR" | "XOR" | "NOT"
+
+consequence     = action_op space target_id [space action_params]
+action_op       = "INITIATE" | "ATTENUATE" | "BLOCK" | "QUARANTINE" | "EVALUATE"
+action_params   = "{" 1*(identifier "=" value) "}"
+
+; --- 3. Invariant Declarations (STRUCTURAL RIGOR) ---
+
+invariant_declaration = "DEFINE" space "INVARIANT" space invariant_name space "AS" space formal_definition
+invariant_name  = identifier
+formal_definition = "TII_HOMOLOGY" | "CAUSAL_UNITY" | "FLOURISH_MONOTONIC" | metric_id
+
+; --- 4. Proof Obligations (VERITAS/JUDEX Attestation) ---
+
+proof_obligation = "OBLIGATION" space obligation_name space "REQUIRES" space proof_ref
+obligation_name = identifier
+proof_ref       = "VPROOF#" identifier
+--------------------------------------------------------
