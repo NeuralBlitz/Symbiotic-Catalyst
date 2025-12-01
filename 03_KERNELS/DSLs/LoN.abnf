@@ -7,3 +7,46 @@ genesis_protocol = "YHWH" | "CGP" | "ProtocolΩ" | "AQM-R"
 declarative_state = "DEFINE" object_type ":" attribute_list
 attribute_list = 1*(identifier "=" value)
 --------------------------------------------------------
+/03_KERNELS/DSLs/LoN.abnf
+--------------------------------------------------------
+(* Language of the Nexus (LoN) ABNF Specification v40.0 *)
+
+document        = 1*line_end statement
+
+; --- Core Structural Components ---
+
+identifier      = 1*(ALPHA / DIGIT / "_")
+symbolic_path   = identifier 1*("." identifier)
+literal_value   = 1*(DIGIT / "." / "-") | quoted_string | "TRUE" | "FALSE"
+quoted_string   = DQUOTE *(%x20-7E) DQUOTE
+line_end        = *(%x20 / %x09) CRLF
+
+; --- 1. Ontology Declaration (Defining Existence) ---
+
+ontology_stmt   = "DEFINE" space object_type space identifier [ space with_clause ]
+object_type     = "AXIOM" | "CK_TOPOLOGY" | "AGENT_TII" | "STRUCTURAL_FIELD" | "FIELD_COUPLING"
+with_clause     = "WITH" space attribute_list
+attribute_list  = "{" 1*(identifier space "=" space literal_value) "}"
+
+; --- 2. Relational Flow and Mapping (Defining Causality and Structure) ---
+
+relation_stmt   = "MAPS" space symbolic_path space "TO" space symbolic_path [ space where_clause ]
+relation_op     = "DEPENDS_ON" | "GOVERNS" | "ENTANGLED_WITH" | "FLOWS_TO"
+
+dependency_stmt = identifier space relation_op space identifier [ space where_clause ]
+
+; --- 3. Genesis Blueprinting (Defining YHWH Structure) ---
+
+blueprint_stmt  = "BLUEPRINT" space genesis_protocol space "REQUIRES" space plan_requirements
+genesis_protocol= "YHWH" | "LCP" | "CGP"
+plan_requirements = "{" 1*(stage_def) "}"
+stage_def       = identifier ":" space symbolic_path
+
+; --- 4. Constraint and Attractor Assertions (CECT/Veritas Binding) ---
+
+constraint_stmt = "ASSERT" space target_metric space comparison_op space value [ space where_clause ]
+target_metric   = "VPCE.Score" | "TII.Homology_Delta" | "CECT.Delta_H_Omega" | "A_Omega.Proximity"
+where_clause    = "WHERE" space condition_expr
+condition_expr  = identifier space comparison_op space value | identifier space relation_op space identifier
+comparison_op   = "==" | "!=" | ">=" | "<=" | "<" | ">"
+--------------------------------------------------------
