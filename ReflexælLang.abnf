@@ -1,0 +1,11 @@
+/03_KERNELS/DSLs/ReflexælLang.abnf
+--------------------------------------------------------
+command     =  reflex_op space identity_target space recursion_cycle [space constraint]
+reflex_op   =  "/psi" | "/lambda" | "/unfold" | "/fold"
+identity_target =  "TII" | "ReflexælCore" | "CK_" UAID
+recursion_cycle =  "↺" (action | loop_invariant)
+constraint  =  "⟿" ethical_op | "⟿" comparison_op value
+action      =  glyph_op | logic_op
+glyph_op    =  "⟁" | "🝩" | "⬡" | "✦" ; core symbolic operators
+ethical_op  =  "ϕ₁" | "ϕ₂₂" | "ΔHΩ"
+--------------------------------------------------------
