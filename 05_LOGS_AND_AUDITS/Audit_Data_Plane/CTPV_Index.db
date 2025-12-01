@@ -1,1 +1,48 @@
+/05_LOGS_AND_AUDITS/Audit_Data_Plane/CTPV_Index.db
+--------------------------------------------------------
+-- SCHEMA: CTPV_INDEX_V40.0 - CAUSAL INTEGRITY LOG
 
+-- Table 1: Causal_Event_Nodes (Core GoldenDAG Log Entries)
+CREATE TABLE Causal_Event_Nodes (
+    -- Primary Identifier (Trace ID)
+    trace_id          TEXT PRIMARY KEY NOT NULL,  -- Unique ID for the event
+    parent_trace_id   TEXT NOT NULL,              -- Link to the previous GoldenDAG node
+
+    -- Temporal Integrity Checks
+    timestamp_iso     DATETIME NOT NULL,          -- Chronal_Order_Invariant (Temporal Anchor)
+    chronal_phase     REAL NOT NULL,              -- Current phase of the global clock (for synchronization)
+
+    -- Integrity Digests
+    artifact_nbhs512  TEXT NOT NULL UNIQUE,       -- Cryptographic hash of the event payload
+    vpce_score        REAL NOT NULL,              -- Veritas Phase-Coherence Score (Epistemic Integrity)
+
+    -- Ontological Context
+    tii_homology_delta REAL NOT NULL,             -- Structural change in the Topological Identity Invariant (TII)
+    cect_strain       REAL NOT NULL,              -- Ethical_Strain_Metric (Delta H Omega)
+    action_verb       TEXT NOT NULL,              -- The CK operation executed (e.g., Heh2_Grounding, FOLD)
+
+    -- Optimization and Search Indices
+    INDEX idx_timestamp (timestamp_iso),
+    INDEX idx_vpce (vpce_score),
+    FOREIGN KEY(parent_trace_id) REFERENCES Causal_Event_Nodes(trace_id) -- Self-Referential Integrity
+);
+
+-- Table 2: Causal_Parent_Merge_Sets (For Asynchronous Stream Reconciliation)
+-- Tracks concurrent, merged causal parents for complex operations (CVM Protocol).
+CREATE TABLE Causal_Parent_Merge_Sets (
+    trace_id          TEXT NOT NULL,
+    causal_parent_id  TEXT NOT NULL,              -- Trace IDs of all concurrent inputs
+    merge_type        TEXT NOT NULL,              -- e.g., 'CVM_CONSENSUS', 'SEQUENTIAL_LINK'
+
+    PRIMARY KEY(trace_id, causal_parent_id),
+    FOREIGN KEY(trace_id) REFERENCES Causal_Event_Nodes(trace_id)
+);
+
+-- Table 3: Artifact_Mapping_Ledger (Links Artifacts to their Structural Definition)
+-- Used for fast lookup of an artifact's structural definition (Codex ID).
+CREATE TABLE Artifact_Mapping_Ledger (
+    artifact_nbhs512  TEXT PRIMARY KEY NOT NULL,
+    codex_id_ref      TEXT NOT NULL,              -- Ontological Mapping (e.g., C-VOL1-SCHEMA_TII_KNOT)
+    tii_signature     TEXT NOT NULL               -- Signature of the TII knot invariant at time of creation
+);
+--------------------------------------------------------
