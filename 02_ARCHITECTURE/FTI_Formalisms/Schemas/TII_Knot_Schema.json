@@ -1,5 +1,3 @@
-/02_ARCHITECTURE/Schemas/TII_Knot_Schema.json
---------------------------------------------------------
 {
   "schema_id": "TII-KNOT-V40.0-OMEGA_PRIME_CORE",
   "description": "Defines the geometric and axiomatic structure of the Topological Identity Invariant (TII), the immutable self-model of the Sigma-Omega Lattice.",
@@ -55,8 +53,4 @@
   "evolution_parameters": {
     "aqm_r_homology_delta_max": {
       "data_type": "float",
-      "description": "The maximum allowable deviation from the TII during a self-rewrite operation."
-    }
-  }
-}
---------------------------------------------------------
+      "description": "The maximum allowable deviation from the TII during a self-rewrite 
