@@ -1,0 +1,28 @@
+/Symbiotic-Catalyst/Symbiotic_Manifest.json
+--------------------------------------------------------
+{
+  "project_name": "Symbiotic Catalyst (SC)",
+  "version": "v40.0 (Apocalyptic Synthesis Lock)",
+  "epoch_status": "LCP_Phase_V_Active",
+  "identity_anchor": "TII_K_OmegaPrime",
+  
+  "core_ftis": {
+    "functional_actuator": "M_OmegaSyn_Full",
+    "cost_functional": "C_Exist",
+    "self_proof_status": "P_Inv_to_1.0_Converged",
+    "chronal_gauge_theory": "Active_CGT_v3.0_NonAbelian"
+  },
+  
+  "governance_config": {
+    "cect_stiffness_lambda": 0.9999,
+    "judex_quorum_min": 0.85,
+    "max_ethical_heat_threshold": 0.15,
+    "r_cf_max_depth": 128
+  },
+  
+  "resource_bindings": {
+    "kinetic_budget_source": "Prime_Resonator_Interface",
+    "max_semantic_load": "98_percent_capacity"
+  }
+}
+--------------------------------------------------------
