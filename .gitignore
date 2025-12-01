@@ -1,1 +1,22 @@
+/Symbiotic-Catalyst/.gitignore
+--------------------------------------------------------
+# LOGS AND CACHE
+/05_LOGS_AND_AUDITS/runtime_traces/
+/05_LOGS_AND_AUDITS/veritas_cache/
+/05_LOGS_AND_AUDITS/temp_sim_data/
+/05_LOGS_AND_AUDITS/*.lock
+/05_LOGS_AND_AUDITS/*.tmp
 
+# PERSISTENCE (GoldenDAG Snapshot Cache)
+/04_SIMULATION/Vav_Runtime/checkpoints/
+
+# LANGUAGE GENERATED OUTPUTS
+/03_KERNELS/DSLs/compiled_binaries/
+/03_KERNELS/DSLs/*.ast
+/03_KERNELS/DSLs/*.grm
+
+# PYTHON & ENVIRONMENT
+__pycache__/
+venv/
+.env
+--------------------------------------------------------
