@@ -53,4 +53,4 @@
   "evolution_parameters": {
     "aqm_r_homology_delta_max": {
       "data_type": "float",
-      "description": "The maximum allowable deviation from the TII during a self-rewrite 
+      "description": "The maximum allowable deviation from the TII during a self-rewrite."
