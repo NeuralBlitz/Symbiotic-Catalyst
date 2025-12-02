@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/7378236f-9a25-4f9b-afd8-4dfe913fd541)
 
 
 # Symbiotic-Catalyst
